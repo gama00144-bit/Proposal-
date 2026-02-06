@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For You 🤍</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: url('bg1.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+  }
+  .card {
+    background: rgba(255,255,255,0.85);
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    width: 90%;
+    max-width: 350px;
+  }
+  h2 { margin-bottom: 10px; }
+  .buttons {
+    margin-top: 20px;
+    position: relative;
+    height: 60px;
+  }
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  #yesBtn {
+    background: #ff6f91;
+    color: white;
+    margin-right: 10px;
+  }
+  #noBtn {
+    background: #ddd;
+    position: absolute;
+  }
+  .hidden { display: none; }
+  .confetti {
+    font-size: 24px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card" id="proposal">
+  <h2>Heyy my Bhathayikee🍉🤍</h2>
+  <p>Will you be mine forever? 🤍🫀</p>
+
+  <div class="buttons">
+    <button id="yesBtn">YES 💖</button>
+    <button id="noBtn">NO 🙈</button>
+  </div>
+</div>
+
+<div class="card hidden" id="yesScreen">
+  <h2>🎉🎉🎉</h2>
+  <p class="confetti">agana vazhik vaa ilakil konnena 💞</p>
+</div>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const proposal = document.getElementById("proposal");
+  const yesScreen = document.getElementById("yesScreen");
+
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 100 - 50;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  });
+
+  noBtn.addEventListener("touchstart", () => {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 100 - 50;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  });
+
+  yesBtn.addEventListener("click", () => {
+    document.body.style.background = "url('bg2.jpg') no-repeat center center/cover";
+    proposal.classList.add("hidden");
+    yesScreen.classList.remove("hidden");
+  });
+</script>
+
+</body>
+</html>

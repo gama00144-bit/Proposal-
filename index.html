@@ -57,7 +57,6 @@
 <div class="card" id="proposal">
   <h2>Heyy my Bhathayikee🍉🤍</h2>
   <p>Will you be mine forever? 🤍🫀</p>
-
   <div class="buttons">
     <button id="yesBtn">YES 💖</button>
     <button id="noBtn">NO 🙈</button>
@@ -69,6 +68,9 @@
   <p class="confetti">agana vazhik vaa ilakil konnena 💞</p>
   <p class="confetti">chakkara 💞</p>
 </div>
+
+<!-- Online audio -->
+<audio id="yesAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="auto" playsinline></audio>
 
 <script>
   const yesBtn = document.getElementById("yesBtn");
@@ -83,16 +85,15 @@
     const y = Math.random() * 100 - 50;
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
   });
-
   noBtn.addEventListener("touchstart", () => {
     const x = Math.random() * 200 - 100;
     const y = Math.random() * 100 - 50;
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
   });
 
-  // YES button click (audio first, then background + confetti)
+  // YES button click
   yesBtn.addEventListener("click", () => {
-    // 🎵 Play audio (must be first)
+    // Play audio first (required for mobile)
     if (yesAudio) {
       yesAudio.currentTime = 0;
       yesAudio.muted = false;
@@ -101,9 +102,9 @@
     }
 
     // Change background
-    document.body.style.background = "url('./bg2.jpg') no-repeat center center/cover";
+    document.body.style.background = "url('bg2.jpg') no-repeat center center/cover";
 
-    // Hide proposal & show YES screen
+    // Hide proposal, show YES screen
     proposal.classList.add("hidden");
     yesScreen.classList.remove("hidden");
 
@@ -125,8 +126,6 @@
     setTimeout(fire, 400);
   });
 </script>
-
-<audio id="yesAudio" src="./love.mp3" preload="auto" playsinline></audio>
 
 </body>
 </html>

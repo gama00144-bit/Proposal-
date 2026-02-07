@@ -1,147 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For You 🤍</title>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: url('bg1.jpg') no-repeat center center/cover;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Arial, sans-serif;
-      transition: background 0.5s ease;
-    }
-    .card {
-      background: rgba(255,255,255,0.85);
-      padding: 20px;
-      border-radius: 16px;
-      text-align: center;
-      width: 90%;
-      max-width: 350px;
-    }
-    h2 { margin-bottom: 10px; }
-    .buttons {
-      margin-top: 20px;
-      position: relative;
-      height: 60px;
-    }
-    button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 20px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    #yesBtn {
-      background: #ff6f91;
-      color: white;
-      margin-right: 10px;
-    }
-    #noBtn {
-      background: #ddd;
-      position: absolute;
-    }
-    .hidden { display: none; }
-    .confetti {
-      font-size: 24px;
-      margin-top: 20px;
-      transition: transform 0.2s;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 🤍</title>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: url('bg1.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    transition: background 0.5s ease;
+  }
+  .card {
+    background: rgba(255,255,255,0.85);
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    width: 90%;
+    max-width: 350px;
+  }
+  h2 { margin-bottom: 10px; }
+  .buttons { margin-top: 20px; position: relative; height: 60px; }
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  #yesBtn { background: #ff6f91; color: white; margin-right: 10px; }
+  #noBtn { background: #ddd; position: absolute; }
+  .hidden { display: none; }
+  .confetti { font-size: 24px; margin-top: 20px; }
+</style>
 </head>
 <body>
 
-  <!-- Proposal Card -->
-  <div class="card" id="proposal">
-    <h2>Heyy my Bhathayikee🍉🤍</h2>
-    <p>Will you be mine forever? 🤍🫀</p>
-    <div class="buttons">
-      <button id="yesBtn">YES 💖</button>
-      <button id="noBtn">NO 🙈</button>
-    </div>
+<div class="card" id="proposal">
+  <h2>Heyy my Bhathayikee🍉🤍</h2>
+  <p>Will you be mine forever? 🤍🫀</p>
+  <div class="buttons">
+    <button id="yesBtn">YES 💖</button>
+    <button id="noBtn">NO 🙈</button>
   </div>
+</div>
 
-  <!-- YES Screen Card -->
-  <div class="card hidden" id="yesScreen">
-    <h2>🎉🎉🎉</h2>
-    <p class="confetti animate-text">agana vazhik vaa ilakil konnena 💞</p>
-    <p class="confetti animate-text">chakkara 💞</p>
-  </div>
+<div class="card hidden" id="yesScreen">
+  <h2>🎉🎉🎉</h2>
+  <p class="confetti">agana vazhik vaa ilakil konnena 💞</p>
+  <p class="confetti">chakkara 💞</p>
+</div>
 
-  <!-- Audio -->
-  <audio id="yesAudio" src="./love.mp3" preload="auto" playsinline></audio>
+<audio id="yesAudio" src="love.mp3" preload="auto" playsinline></audio>
 
-  <script>
-    const yesBtn = document.getElementById("yesBtn");
-    const noBtn = document.getElementById("noBtn");
-    const proposal = document.getElementById("proposal");
-    const yesScreen = document.getElementById("yesScreen");
-    const yesAudio = document.getElementById("yesAudio");
-    const animateTexts = document.querySelectorAll(".animate-text");
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const proposal = document.getElementById("proposal");
+const yesScreen = document.getElementById("yesScreen");
+const yesAudio = document.getElementById("yesAudio");
 
-    // NO button floating
-    noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * 200 - 100;
-      const y = Math.random() * 100 - 50;
-      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+// NO button moves
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 100 - 50;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
+noBtn.addEventListener("touchstart", () => {
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 100 - 50;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+// YES button click
+yesBtn.addEventListener("click", () => {
+  // Play audio
+  if (yesAudio) {
+    yesAudio.currentTime = 0;
+    yesAudio.volume = 1;
+    yesAudio.play().catch(err => console.log("Audio play error:", err));
+  }
+
+  // Change background and show YES screen
+  document.body.style.background = "url('bg2.jpg') no-repeat center center/cover";
+  proposal.classList.add("hidden");
+  yesScreen.classList.remove("hidden");
+
+  // Confetti
+  const fireConfetti = () => {
+    confetti({
+      particleCount: 30,
+      spread: 70,
+      startVelocity: 35,
+      gravity: 0.9,
+      ticks: 200,
+      shapes: ['heart'],
+      colors: ['#ff3366','#ff5c8a','#ff99c8','#ffd1dc'],
+      origin: { x: Math.random(), y: Math.random() * 0.5 }
     });
+  };
 
-    noBtn.addEventListener("touchstart", () => {
-      const x = Math.random() * 200 - 100;
-      const y = Math.random() * 100 - 50;
-      noBtn.style.transform = `translate(${x}px, ${y}px)`;
-    });
-
-    // YES button click
-    yesBtn.addEventListener("click", () => {
-      // Play audio first
-      if (yesAudio) {
-        yesAudio.currentTime = 0;
-        yesAudio.muted = false;
-        yesAudio.volume = 1;
-        yesAudio.play().catch(err => console.log("Audio play error:", err));
-      }
-
-      // Change background & show YES screen
-      document.body.style.background = "url('./bg2.jpg') no-repeat center center/cover";
-      proposal.classList.add("hidden");
-      yesScreen.classList.remove("hidden");
-
-      // Heart confetti burst function
-      const fireConfetti = () => {
-        confetti({
-          particleCount: 30,
-          spread: 70,
-          startVelocity: 35,
-          gravity: 0.9,
-          ticks: 200,
-          shapes: ['heart'],
-          colors: ['#ff3366', '#ff5c8a', '#ff99c8', '#ffd1dc'],
-          origin: { x: Math.random(), y: Math.random() * 0.5 }
-        });
-      };
-
-      // Confetti & text pulse loop
-      let count = 0;
-      const interval = setInterval(() => {
-        fireConfetti();
-
-        animateTexts.forEach(el => {
-          el.style.transform = "scale(1.2)";
-          setTimeout(() => el.style.transform = "scale(1)", 150);
-        });
-
-        count++;
-        if(count > 50) clearInterval(interval); // Lasts ~15s
-      }, 300);
-    });
-  </script>
+  // Confetti every 0.3s for ~15s
+  let count = 0;
+  const interval = setInterval(() => {
+    fireConfetti();
+    count++;
+    if(count > 50) clearInterval(interval);
+  }, 300);
+});
+</script>
 
 </body>
 </html>

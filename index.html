@@ -71,34 +71,13 @@
 </div>
 
 <script>
-const yesAudio = document.getElementById("yesAudio");
+  const yesBtn = document.getElementById("yesBtn");
   const noBtn = document.getElementById("noBtn");
-  yesBtn.addEventListener("click", () => {
-  document.body.style.background = "url('./bg2.jpg') no-repeat center center/cover";
-  proposal.classList.add("hidden");
-  yesScreen.classList.remove("hidden");
-
-  // 💖 Heart confetti (fallback-safe)
-  const fire = () => {
-    confetti({
-      particleCount: 60,
-      spread: 80,
-      startVelocity: 35,
-      gravity: 0.9,
-      ticks: 220,
-      shapes: ['heart'],
-      colors: ['#ff3366', '#ff5c8a', '#ff99c8', '#ffd1dc'],
-      origin: { x: 0.5, y: 0.6 }
-    });
-  };
-
-  fire();
-  setTimeout(fire, 200);
-  setTimeout(fire, 400);
-});
   const proposal = document.getElementById("proposal");
   const yesScreen = document.getElementById("yesScreen");
+  const yesAudio = document.getElementById("yesAudio");
 
+  // NO button floating
   noBtn.addEventListener("mouseover", () => {
     const x = Math.random() * 200 - 100;
     const y = Math.random() * 100 - 50;
@@ -111,13 +90,36 @@ const yesAudio = document.getElementById("yesAudio");
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
   });
 
+  // YES button click (confetti + audio + background)
   yesBtn.addEventListener("click", () => {
-    document.body.style.background = "url('bg2.jpg') no-repeat center center/cover";
+    document.body.style.background = "url('./bg2.jpg') no-repeat center center/cover";
     proposal.classList.add("hidden");
     yesScreen.classList.remove("hidden");
-  });
-<audio id="yesAudio" src="./love.mp3" preload="auto"></audio>
-</script>
 
+    // 💖 Heart confetti
+    const fire = () => {
+      confetti({
+        particleCount: 60,
+        spread: 80,
+        startVelocity: 35,
+        gravity: 0.9,
+        ticks: 220,
+        shapes: ['heart'],
+        colors: ['#ff3366', '#ff5c8a', '#ff99c8', '#ffd1dc'],
+        origin: { x: 0.5, y: 0.6 }
+      });
+    };
+
+    fire();
+    setTimeout(fire, 200);
+    setTimeout(fire, 400);
+
+    // 🎵 Play audio
+    if (yesAudio) {
+      yesAudio.currentTime = 0;
+      yesAudio.play().catch(() => {});
+    }
+  });
+</script>
 </body>
 </html>

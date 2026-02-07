@@ -115,9 +115,12 @@
     setTimeout(fire, 400);
 
     // 🎵 Play audio
-    if (yesAudio) {
-      yesAudio.currentTime = 0;
-      yesAudio.play().catch(() => {});
+if (yesAudio) {
+  yesAudio.currentTime = 0;
+  yesAudio.muted = false;
+  yesAudio.volume = 1;
+  yesAudio.play().catch(err => console.log(err));
+}
     }
   });
 </script>

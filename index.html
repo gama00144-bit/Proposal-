@@ -91,7 +91,18 @@
   });
 
    yesBtn.addEventListener("click", () => {
+  // 🎵 Play audio first — must be first for mobile
+  if (yesAudio) {
+    yesAudio.currentTime = 0;
+    yesAudio.muted = false;
+    yesAudio.volume = 1;
+    yesAudio.play().catch(err => console.log("Audio play error:", err));
+  }
+
+  // Change background
   document.body.style.background = "url('./bg2.jpg') no-repeat center center/cover";
+
+  // Hide proposal & show YES screen
   proposal.classList.add("hidden");
   yesScreen.classList.remove("hidden");
 
@@ -111,6 +122,7 @@
   fire();
   setTimeout(fire, 200);
   setTimeout(fire, 400);
+});
 
   // 🎵 Play audio
   if (yesAudio) {

@@ -54,7 +54,6 @@
 </head>
 <body>
 
-<!-- Proposal Card -->
 <div class="card" id="proposal">
   <h2>Heyy my Bhathayikee🍉🤍</h2>
   <p>Will you be mine forever? 🤍🫀</p>
@@ -65,69 +64,69 @@
   </div>
 </div>
 
-<!-- YES Screen -->
 <div class="card hidden" id="yesScreen">
   <h2>🎉🎉🎉</h2>
   <p class="confetti">agana vazhik vaa ilakil konnena 💞</p>
   <p class="confetti">chakkara 💞</p>
 </div>
 
-<!-- Audio -->
-<audio id="yesAudio" src="https://yourdomain.com/love.mp3" preload="auto" playsinline></audio>
+<audio id="yesAudio" src="./love.mp3" preload="auto" playsinline></audio>
 
 <script>
-  const yesBtn = document.getElementById("yesBtn");
-  const noBtn = document.getElementById("noBtn");
-  const proposal = document.getElementById("proposal");
-  const yesScreen = document.getElementById("yesScreen");
-  const yesAudio = document.getElementById("yesAudio");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const proposal = document.getElementById("proposal");
+const yesScreen = document.getElementById("yesScreen");
+const yesAudio = document.getElementById("yesAudio");
 
-  // NO button floating effect
-  noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * 200 - 100;
-    const y = Math.random() * 100 - 50;
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-  });
-  noBtn.addEventListener("touchstart", () => {
-    const x = Math.random() * 200 - 100;
-    const y = Math.random() * 100 - 50;
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-  });
+// NO button floating
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 100 - 50;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
 
-  // YES button click: confetti + audio + background
-  yesBtn.addEventListener("click", () => {
-    // Play your custom audio (must be first for mobile)
-    if (yesAudio) {
-      yesAudio.currentTime = 0;
-      yesAudio.muted = false;
-      yesAudio.volume = 1;
-      yesAudio.play().catch(err => console.log("Audio play error:", err));
-    }
+noBtn.addEventListener("touchstart", () => {
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 100 - 50;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
 
-    // Change background
-    document.body.style.background = "url('./bg2.jpg') no-repeat center center/cover";
+// YES button click
+yesBtn.addEventListener("click", () => {
 
-    // Hide proposal and show YES screen
-    proposal.classList.add("hidden");
-    yesScreen.classList.remove("hidden");
+  // 🎵 Play uploaded audio first
+  if (yesAudio) {
+    yesAudio.currentTime = 0;
+    yesAudio.muted = false;
+    yesAudio.volume = 1;
+    yesAudio.play().catch(err => console.log("Audio play error:", err));
+  }
 
-    // Heart-shaped confetti
-    const fire = () => {
-      confetti({
-        particleCount: 60,
-        spread: 80,
-        startVelocity: 35,
-        gravity: 0.9,
-        ticks: 220,
-        shapes: ['heart'],
-        colors: ['#ff3366', '#ff5c8a', '#ff99c8', '#ffd1dc'],
-        origin: { x: 0.5, y: 0.6 }
-      });
-    };
-    fire();
-    setTimeout(fire, 200);
-    setTimeout(fire, 400);
-  });
+  // Change background
+  document.body.style.background = "url('./bg2.jpg') no-repeat center center/cover";
+
+  // Hide proposal & show YES screen
+  proposal.classList.add("hidden");
+  yesScreen.classList.remove("hidden");
+
+  // 💖 Heart confetti
+  const fire = () => {
+    confetti({
+      particleCount: 60,
+      spread: 80,
+      startVelocity: 35,
+      gravity: 0.9,
+      ticks: 220,
+      shapes: ['heart'],
+      colors: ['#ff3366', '#ff5c8a', '#ff99c8', '#ffd1dc'],
+      origin: { x: 0.5, y: 0.6 }
+    });
+  };
+  fire();
+  setTimeout(fire, 200);
+  setTimeout(fire, 400);
+});
 </script>
 
 </body>

@@ -57,7 +57,8 @@
   <p class="confetti">chakkara 💞</p>
 </div>
 
-<audio id="yesAudio" src="love.mp3" preload="auto" playsinline></audio>
+<!-- Audio must be last -->
+<audio id="yesAudio" src="love.mp3" preload="auto"></audio>
 
 <script>
 const yesBtn = document.getElementById("yesBtn");
@@ -80,15 +81,20 @@ noBtn.addEventListener("touchstart", () => {
 
 // YES button click
 yesBtn.addEventListener("click", () => {
-  // Play audio
+  // Play audio first
   if (yesAudio) {
     yesAudio.currentTime = 0;
     yesAudio.volume = 1;
-    yesAudio.play().catch(err => console.log("Audio play error:", err));
+    const playPromise = yesAudio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(err => console.log("Audio play error:", err));
+    }
   }
 
-  // Change background and show YES screen
+  // Change background
   document.body.style.background = "url('bg2.jpg') no-repeat center center/cover";
+
+  // Hide proposal & show YES screen
   proposal.classList.add("hidden");
   yesScreen.classList.remove("hidden");
 

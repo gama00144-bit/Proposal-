@@ -90,39 +90,38 @@
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
   });
 
-  // YES button click (confetti + audio + background)
-  yesBtn.addEventListener("click", () => {
-    document.body.style.background = "url('./bg2.jpg') no-repeat center center/cover";
-    proposal.classList.add("hidden");
-    yesScreen.classList.remove("hidden");
+   yesBtn.addEventListener("click", () => {
+  document.body.style.background = "url('./bg2.jpg') no-repeat center center/cover";
+  proposal.classList.add("hidden");
+  yesScreen.classList.remove("hidden");
 
-    // 💖 Heart confetti
-    const fire = () => {
-      confetti({
-        particleCount: 60,
-        spread: 80,
-        startVelocity: 35,
-        gravity: 0.9,
-        ticks: 220,
-        shapes: ['heart'],
-        colors: ['#ff3366', '#ff5c8a', '#ff99c8', '#ffd1dc'],
-        origin: { x: 0.5, y: 0.6 }
-      });
-    };
+  // 💖 Heart confetti
+  const fire = () => {
+    confetti({
+      particleCount: 60,
+      spread: 80,
+      startVelocity: 35,
+      gravity: 0.9,
+      ticks: 220,
+      shapes: ['heart'],
+      colors: ['#ff3366', '#ff5c8a', '#ff99c8', '#ffd1dc'],
+      origin: { x: 0.5, y: 0.6 }
+    });
+  };
+  fire();
+  setTimeout(fire, 200);
+  setTimeout(fire, 400);
 
-    fire();
-    setTimeout(fire, 200);
-    setTimeout(fire, 400);
-
-    // 🎵 Play audio
-if (yesAudio) {
-  yesAudio.currentTime = 0;
-  yesAudio.muted = false;
-  yesAudio.volume = 1;
-  yesAudio.play().catch(err => console.log(err));
-}
-    
-  });
+  // 🎵 Play audio
+  if (yesAudio) {
+    setTimeout(() => {
+      yesAudio.currentTime = 0;
+      yesAudio.muted = false;
+      yesAudio.volume = 1;
+      yesAudio.play().catch(err => console.log("Audio play error:", err));
+    }, 50);
+  }
+});
 </script>
 
 <audio id="yesAudio" src="https://filesamples.com/samples/audio/mp3/sample3.mp3" preload="auto" playsinline></audio>

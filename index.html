@@ -77,28 +77,23 @@
   proposal.classList.add("hidden");
   yesScreen.classList.remove("hidden");
 
-  // 💖 Heart confetti burst
-  const defaults = {
-    spread: 70,
-    ticks: 200,
-    gravity: 0.8,
-    decay: 0.9,
-    startVelocity: 35,
-    shapes: ['heart'],
-    colors: ['#ff5c8a', '#ff99c8', '#ffd1dc', '#ff3366']
-  };
-
-  function shoot() {
+  // 💖 Heart confetti (fallback-safe)
+  const fire = () => {
     confetti({
-      ...defaults,
-      particleCount: 40,
+      particleCount: 60,
+      spread: 80,
+      startVelocity: 35,
+      gravity: 0.9,
+      ticks: 220,
+      shapes: ['heart'],
+      colors: ['#ff3366', '#ff5c8a', '#ff99c8', '#ffd1dc'],
       origin: { x: 0.5, y: 0.6 }
     });
-  }
+  };
 
-  shoot();
-  setTimeout(shoot, 250);
-  setTimeout(shoot, 500);
+  fire();
+  setTimeout(fire, 200);
+  setTimeout(fire, 400);
 });
   const proposal = document.getElementById("proposal");
   const yesScreen = document.getElementById("yesScreen");

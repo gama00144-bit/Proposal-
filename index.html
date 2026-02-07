@@ -67,7 +67,7 @@
 <div class="card hidden" id="yesScreen">
   <h2>🎉🎉🎉</h2>
   <p class="confetti">agana vazhik vaa ilakil konnena 💞</p>
-<p class="confetti">chakkara 💞</p>
+  <p class="confetti">chakkara 💞</p>
 </div>
 
 <script>
@@ -90,50 +90,40 @@
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
   });
 
-   yesBtn.addEventListener("click", () => {
-  // 🎵 Play audio first — must be first for mobile
-  if (yesAudio) {
-    yesAudio.currentTime = 0;
-    yesAudio.muted = false;
-    yesAudio.volume = 1;
-    yesAudio.play().catch(err => console.log("Audio play error:", err));
-  }
-
-  // Change background
-  document.body.style.background = "url('./bg2.jpg') no-repeat center center/cover";
-
-  // Hide proposal & show YES screen
-  proposal.classList.add("hidden");
-  yesScreen.classList.remove("hidden");
-
-  // 💖 Heart confetti
-  const fire = () => {
-    confetti({
-      particleCount: 60,
-      spread: 80,
-      startVelocity: 35,
-      gravity: 0.9,
-      ticks: 220,
-      shapes: ['heart'],
-      colors: ['#ff3366', '#ff5c8a', '#ff99c8', '#ffd1dc'],
-      origin: { x: 0.5, y: 0.6 }
-    });
-  };
-  fire();
-  setTimeout(fire, 200);
-  setTimeout(fire, 400);
-});
-
-  // 🎵 Play audio
-  if (yesAudio) {
-    setTimeout(() => {
+  // YES button click (audio first, then background + confetti)
+  yesBtn.addEventListener("click", () => {
+    // 🎵 Play audio (must be first)
+    if (yesAudio) {
       yesAudio.currentTime = 0;
       yesAudio.muted = false;
       yesAudio.volume = 1;
       yesAudio.play().catch(err => console.log("Audio play error:", err));
-    }, 50);
-  }
-});
+    }
+
+    // Change background
+    document.body.style.background = "url('./bg2.jpg') no-repeat center center/cover";
+
+    // Hide proposal & show YES screen
+    proposal.classList.add("hidden");
+    yesScreen.classList.remove("hidden");
+
+    // 💖 Heart confetti
+    const fire = () => {
+      confetti({
+        particleCount: 60,
+        spread: 80,
+        startVelocity: 35,
+        gravity: 0.9,
+        ticks: 220,
+        shapes: ['heart'],
+        colors: ['#ff3366', '#ff5c8a', '#ff99c8', '#ffd1dc'],
+        origin: { x: 0.5, y: 0.6 }
+      });
+    };
+    fire();
+    setTimeout(fire, 200);
+    setTimeout(fire, 400);
+  });
 </script>
 
 <audio id="yesAudio" src="./love.mp3" preload="auto" playsinline></audio>

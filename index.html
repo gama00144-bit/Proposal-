@@ -72,7 +72,34 @@
 
 <script>
   const noBtn = document.getElementById("noBtn");
-  const yesBtn = document.getElementById("yesBtn");
+  yesBtn.addEventListener("click", () => {
+  document.body.style.background = "url('./bg2.jpg') no-repeat center center/cover";
+  proposal.classList.add("hidden");
+  yesScreen.classList.remove("hidden");
+
+  // 💖 Heart confetti burst
+  const defaults = {
+    spread: 70,
+    ticks: 200,
+    gravity: 0.8,
+    decay: 0.9,
+    startVelocity: 35,
+    shapes: ['heart'],
+    colors: ['#ff5c8a', '#ff99c8', '#ffd1dc', '#ff3366']
+  };
+
+  function shoot() {
+    confetti({
+      ...defaults,
+      particleCount: 40,
+      origin: { x: 0.5, y: 0.6 }
+    });
+  }
+
+  shoot();
+  setTimeout(shoot, 250);
+  setTimeout(shoot, 500);
+});
   const proposal = document.getElementById("proposal");
   const yesScreen = document.getElementById("yesScreen");
 
